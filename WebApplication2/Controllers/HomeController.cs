@@ -29,8 +29,16 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ViewResult RsvpForm(GuestResponse guest)
         {
-            Repository.AddResponse(guest);
-            return View("Thanks",guest);
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guest);
+                return View("Thanks", guest);
+            }
+            else
+            {
+                return View();
+            }
+            
         }
         public ViewResult ListResponses()
         {
